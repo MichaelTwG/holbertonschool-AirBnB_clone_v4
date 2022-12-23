@@ -34,11 +34,31 @@ window.onload = function () {
 
     const status = document.querySelector("#api_status");
 
-    fetch("http://10.9.100.10:5001/api/v1/status/")
+    fetch("http://0.0.0.0:5001/api/v1/status/")
         .then(response => response.json())
         .then(data => {
             if (data.status === 'OK') {
                 status.classList.add("available");
+
+                // Este codigo solo se tiene que ejecutar si la API esta en funcionamiento
+
+                const filters = {};
+
+                options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(filters)
+                };
+
+                fetch("http://0.0.0.0:5001/api/v1/places_search/", options)
+                    .then(response => response.JSON)
+                    .then(places => {
+                        
+                    })
+
+
             } else {
                 status.classList.remove("available");
             }

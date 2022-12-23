@@ -28,7 +28,11 @@ window.onload = function () {
             if (outString.length >= 32) {
                 outString = outString.substring(0, 32) + "..."
             }
-            h4.textContent = outString;
+            if (outString.length > 0) {
+                h4.textContent = outString;
+            } else {
+                h4.textContent = " ";
+            }
         });
     }
 }
