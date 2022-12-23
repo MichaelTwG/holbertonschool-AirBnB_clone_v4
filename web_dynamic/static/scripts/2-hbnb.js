@@ -31,12 +31,20 @@ window.onload = function () {
             h4.textContent = outString;
         });
     }
-    fetch("https://intranet.hbtn.io/projects/2135#:~:text=http%3A//0.0.0.0%3A5001/api/v1/status/")
+
+    const status = document.querySelector("#api_status");
+
+    fetch("http://172.23.44.184:5001/api/v1/status/")
         .then(response => response.json())
         .then(data => {
-
+            if (data.status === 'OK') {
+                status.classList.add("available");
+            } else {
+                status.classList.remove("available");
+            }
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
+            status.classList.remove("available");
         });
 }
